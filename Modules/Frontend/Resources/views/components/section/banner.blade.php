@@ -1,6 +1,6 @@
 <div class="hero-banner-wrapper position-relative">
-    <div class="slick-banner main-banner" data-speed="1000" data-autoplay="false" data-center="false" data-infinite="true"
-        data-navigation="false" data-pagination="true" data-spacing="0">
+    <div class="slick-banner main-banner" data-speed="1000" data-autoplay="false" data-center="false"
+        data-infinite="true" data-navigation="false" data-pagination="true" data-spacing="0">
 
         @foreach ($data as $index => $slider)
 
@@ -29,7 +29,8 @@
                                                     @if (!empty($slideData['rating']))
                                                         <li>
                                                             <span class="hero-movie-rating">
-                                                                <span class="badge bg-warning text-dark">{{ $slideData['rating'] }}</span>
+                                                                <span
+                                                                    class="badge bg-warning text-dark">{{ $slideData['rating'] }}</span>
                                                             </span>
                                                         </li>
                                                     @endif
@@ -61,14 +62,17 @@
                                             </div>
 
                                             <!-- Description -->
-                                            <p class="hero-movie-description mb-4 hero-line-count-4">{!! $slideData['description'] ?? '' !!}</p>
+                                            <p class="hero-movie-description mb-4 hero-line-count-4">
+                                                {!! $slideData['description'] ?? '' !!}
+                                            </p>
 
                                             <!-- Tags/Genres -->
                                             @if (!empty($slideData['genres']))
                                                 <div class="hero-movie-tags mb-3">
                                                     <span class="text-muted me-2">Tags:</span>
                                                     @foreach ($slideData['genres'] as $genre)
-                                                        <span class="badge bg-dark me-2">{{ is_array($genre) ? $genre['name'] ?? '' : $genre->name ?? '' }}</span>
+                                                        <span
+                                                            class="badge bg-dark me-2">{{ is_array($genre) ? $genre['name'] ?? '' : $genre->name ?? '' }}</span>
                                                     @endforeach
                                                 </div>
                                             @endif
@@ -114,7 +118,7 @@
                                             <!-- Play Button -->
                                             <div class="mt-4">
                                                 <a href="{{ $slider['type'] == 'livetv' ? route('livetv-details', ['id' => $slideData['id']]) : ($slider['type'] == 'video' ? route('video-details', ['id' => $slideData['id']]) : ($slideData['type'] == 'tvshow' ? route('tvshow-details', ['id' => $slideData['id']]) : route('movie-details', ['id' => $slideData['id']]))) }}"
-                                    class="btn btn-danger btn-lg px-5 hero-play-btn">
+                                                    class="btn btn-danger btn-lg px-5 hero-play-btn">
                                                     <i class="ph-fill ph-play me-2"></i> Play Now
                                                 </a>
                                             </div>
@@ -145,8 +149,8 @@
                         @if (isenablemodule($slider['type']) == 1)
                             <div class="hero-side-thumbnail-item" data-slide-index="{{ $index }}">
                                 <div class="hero-side-movie-card position-relative">
-                                    <img src="{{ setBaseUrlWithFileName($slider['file_url']) }}"
-                                        class="img-fluid rounded" alt="{{ $thumbnailData['name'] ?? 'Movie' }}">
+                                    <img src="{{ setBaseUrlWithFileName($slider['file_url']) }}" class="img-fluid rounded"
+                                        alt="{{ $thumbnailData['name'] ?? 'Movie' }}">
                                     <div class="hero-side-movie-overlay">
                                         <h6 class="text-white mb-1">{{ $thumbnailData['name'] ?? 'Featured' }}</h6>
                                         <p class="text-white-50 small mb-0">
@@ -275,7 +279,7 @@
         background: rgba(0, 0, 0, 0.5);
         backdrop-filter: blur(15px);
         padding: 25px;
-        border-radius: 20px;
+        border-radius: 12px;
         box-shadow: 0 10px 40px rgba(0, 0, 0, 0.7);
     }
 
@@ -302,6 +306,7 @@
             opacity: 0;
             transform: translateY(20px);
         }
+
         to {
             opacity: 1;
             transform: translateY(0);
@@ -310,7 +315,7 @@
 
     .hero-side-movie-card {
         overflow: hidden;
-        border-radius: 12px;
+        border-radius: 8px;
         cursor: pointer;
         transition: all 0.3s ease;
         box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
@@ -478,24 +483,24 @@
 
 @push('after-scripts')
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', function () {
             const playButtons = document.querySelectorAll('.hero-play-btn');
             playButtons.forEach(button => {
-                button.addEventListener('click', function(e) {
+                button.addEventListener('click', function (e) {
                     const encryptedUrl = this.getAttribute('data-encrypted-url');
 
                     if (encryptedUrl) {
                         e.preventDefault();
                         fetch('{{ route('decrypt.url') }}', {
-                                method: 'POST',
-                                headers: {
-                                    'Content-Type': 'application/json',
-                                    'X-CSRF-TOKEN': '{{ csrf_token() }}'
-                                },
-                                body: JSON.stringify({
-                                    encrypted_url: encryptedUrl
-                                })
+                            method: 'POST',
+                            headers: {
+                                'Content-Type': 'application/json',
+                                'X-CSRF-TOKEN': '{{ csrf_token() }}'
+                            },
+                            body: JSON.stringify({
+                                encrypted_url: encryptedUrl
                             })
+                        })
                             .then(response => response.json())
                             .then(data => {
                                 if (data.url) {
@@ -539,9 +544,9 @@
             updateHeroSideThumbnails(0);
 
             // Update when main slider changes
-            $(document).ready(function() {
+            $(document).ready(function () {
                 if (typeof $('.slick-banner').slick === 'function') {
-                    $('.slick-banner').on('afterChange', function(event, slick, currentSlide) {
+                    $('.slick-banner').on('afterChange', function (event, slick, currentSlide) {
                         currentHeroSlideIndex = currentSlide;
                         updateHeroSideThumbnails(currentSlide);
                     });
@@ -549,7 +554,7 @@
             });
 
             // Make moveHeroSideThumbnails global
-            window.moveHeroSideThumbnails = function(direction) {
+            window.moveHeroSideThumbnails = function (direction) {
                 if (direction === 'next') {
                     currentHeroSlideIndex = (currentHeroSlideIndex + 1) % totalHeroSlides;
                 } else {
@@ -564,7 +569,7 @@
 
             // Click on thumbnail to change main slide
             document.querySelectorAll('.hero-side-thumbnail-item').forEach(item => {
-                item.addEventListener('click', function() {
+                item.addEventListener('click', function () {
                     const slideIndex = parseInt(this.getAttribute('data-slide-index'));
                     if (typeof $('.slick-banner').slick === 'function') {
                         $('.slick-banner').slick('slickGoTo', slideIndex);

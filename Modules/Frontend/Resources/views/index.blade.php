@@ -19,7 +19,7 @@
 
 
 
-    <div class="container-fluid padding-right-0">
+    <div class="container-fluid padding-right-1" style="padding-right: 0.7rem;">
         <div class="overflow-hidden">
 
             @php
@@ -682,25 +682,25 @@
                             const ads = data.data.filter(item => item.placement === 'home_page');
                             if (ads.length > 0) {
                                 let adHtml = `
-                                    <div class="custom-ad-box">
-                                        <div class="custom-ad-slider">
-                                            ${ads.map(ad => {
+                                                                <div class="custom-ad-box">
+                                                                    <div class="custom-ad-slider">
+                                                                        ${ads.map(ad => {
                                     let content = '';
                                     if (ad.type === 'image') {
                                         let imgSrc = ad.url_type === 'local' ? `${ad.media}` : ad.media;
                                         content = `
-                                                        <div class="custom-ad-content">
-                                                            ${ad.redirect_url ? `
-                                                                <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
-                                                                    <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                    <div class="ad-overlay"></div>
-                                                                </a>
-                                                            ` : `
-                                                                <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                <div class="ad-overlay"></div>
-                                                            `}
-                                                        </div>
-                                                    `;
+                                                                                    <div class="custom-ad-content">
+                                                                                        ${ad.redirect_url ? `
+                                                                                            <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
+                                                                                                <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                                <div class="ad-overlay"></div>
+                                                                                            </a>
+                                                                                        ` : `
+                                                                                            <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                            <div class="ad-overlay"></div>
+                                                                                        `}
+                                                                                    </div>
+                                                                                `;
                                     } else if (ad.type === 'video') {
                                         // Check if it's a YouTube URL
                                         let isYouTube = ad.media.includes('youtube.com') || ad.media.includes('youtu.be');
@@ -714,51 +714,51 @@
                                                 videoId = url.searchParams.get('v');
                                             }
                                             content = `
-                                                            <div class="custom-ad-content video-content">
-                                                                <div class="video-container">
-                                                                    <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
-                                                                </div>
-                                                                <div class="ad-overlay"></div>
-                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                            </div>
-                                                        `;
+                                                                                        <div class="custom-ad-content video-content">
+                                                                                            <div class="video-container">
+                                                                                                <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
+                                                                                            </div>
+                                                                                            <div class="ad-overlay"></div>
+                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                        </div>
+                                                                                    `;
                                         } else if (ad.url_type == "url") {
                                             // Regular video file
                                             content = `
-                                                            <div class="custom-ad-content video-content">
-                                                                <div class="video-container">
-                                                                    <video class="ad-video" autoplay muted loop playsinline>
-                                                                        <source src="${ad.media}" type="video/mp4">
-                                                                        Your browser does not support the video tag.
-                                                                    </video>
-                                                                </div>
-                                                                <div class="ad-overlay"></div>
-                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                            </div>
-                                                        `;
+                                                                                        <div class="custom-ad-content video-content">
+                                                                                            <div class="video-container">
+                                                                                                <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                    <source src="${ad.media}" type="video/mp4">
+                                                                                                    Your browser does not support the video tag.
+                                                                                                </video>
+                                                                                            </div>
+                                                                                            <div class="ad-overlay"></div>
+                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                        </div>
+                                                                                    `;
                                         }
                                         else {
 
                                             // Regular video file
                                             content = `
-                                                            <div class="custom-ad-content video-content">
-                                                                <div class="video-container">
-                                                                    <video class="ad-video" autoplay muted loop playsinline>
-                                                                        <source src="${baseUrl}${ad.media}" type="video/mp4">
-                                                                        Your browser does not support the video tag.
-                                                                    </video>
-                                                                </div>
-                                                                <div class="ad-overlay"></div>
-                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                            </div>
-                                                        `;
+                                                                                        <div class="custom-ad-content video-content">
+                                                                                            <div class="video-container">
+                                                                                                <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                    <source src="${baseUrl}${ad.media}" type="video/mp4">
+                                                                                                    Your browser does not support the video tag.
+                                                                                                </video>
+                                                                                            </div>
+                                                                                            <div class="ad-overlay"></div>
+                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                        </div>
+                                                                                    `;
                                         }
                                     }
                                     return `<div class="custom-ad-wrapper">${content}</div>`;
                                 }).join('')}
-                                        </div>
-                                    </div>
-                                `;
+                                                                    </div>
+                                                                </div>
+                                                            `;
                                 const adSection = document.getElementById('custom-homepage-ad-section');
                                 if (adSection) {
                                     adSection.innerHTML = adHtml;
