@@ -10,7 +10,7 @@
     @endphp
 
 
-    <div id="banner-section" class="section-spacing-bottom px-0">
+    <div id="banner-section" class="px-0 section-spacing-bottom">
         @if($is_enable_banner == 1)
             @include('frontend::components.section.banner', ['data' => $sliders ?? []])
         @endif
@@ -31,10 +31,10 @@
                 <div id="continue-watch-section" class="section-wraper scroll-section section-hidden">
 
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
-                                    <div class="continue-watch-card shimmer border rounded-3 placeholder-glow">
+                                <div class="mb-3 shimmer-container col">
+                                    <div class="border continue-watch-card shimmer rounded-3 placeholder-glow">
                                         <div class="placeholder continue-watch-card-image position-relative">
                                             <div class="placeholder placeholder-glow">
                                                 <a href="#" class="d-block image-link">
@@ -70,9 +70,9 @@
             @if(isenablemodule('movie') == 1)
                 <div id="top-10-moive-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -94,9 +94,9 @@
 
                 <div id="latest-moive-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -107,9 +107,9 @@
 
             <div id="pay-per-view-movie-section" class="section-wraper scroll-section section-hidden">
                 <div class="card-style-slider movie-shimmer">
-                    <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                    <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                         @for ($i = 0; $i < 6; $i++)
-                            <div class="shimmer-container col mb-3">
+                            <div class="mb-3 shimmer-container col">
                                 @include('components.card_shimmer_movieList')
                             </div>
                         @endfor
@@ -119,9 +119,9 @@
 
             <div id="language-section" class="section-wraper scroll-section section-hidden">
                 <div class="card-style-slider movie-shimmer">
-                    <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                    <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                         @for ($i = 0; $i < 6; $i++)
-                            <div class="shimmer-container col mb-3">
+                            <div class="mb-3 shimmer-container col">
                                 @include('components.card_shimmer_languageList')
                             </div>
                         @endfor
@@ -134,9 +134,9 @@
 
                 <div id="popular-moive-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -146,12 +146,13 @@
             @endif
 
 
+
             @if(isenablemodule('livetv') == 1)
                 <div id="topchannel-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider shimmer-container">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_channel')
                                 </div>
                             @endfor
@@ -163,9 +164,9 @@
             @if(isenablemodule('tvshow') == 1)
                 <div id="popular-tvshow-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -173,12 +174,25 @@
                     </div>
                 </div>
             @endif
+            @if(isenablemodule('movie') == 1)
 
+                <div id="popular-moive-section-2" class="section-wraper scroll-section section-hidden">
+                    <div class="card-style-slider movie-shimmer">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
+                            @for ($i = 0; $i < 6; $i++)
+                                <div class="mb-3 shimmer-container col">
+                                    @include('components.card_shimmer_movieList')
+                                </div>
+                            @endfor
+                        </div>
+                    </div>
+                </div>
+            @endif
             <div id="favorite-personality" class="section-wraper scroll-section section-hidden">
                 <div class="card-style-slider shimmer-container">
-                    <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7 mt-3">
+                    <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7">
                         @for ($i = 0; $i < 7; $i++)
-                            <div class="shimmer-container col mb-3">
+                            <div class="mb-3 shimmer-container col">
                                 @include('components.card_shimmer_crew')
                             </div>
                         @endfor
@@ -189,9 +203,9 @@
             @if(isenablemodule('movie') == 1)
                 <div id="free-movie-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -202,9 +216,9 @@
 
             <div id="genres-section" class="section-wraper scroll-section section-hidden">
                 <div class="card-style-slider shimmer-container">
-                    <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                    <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                         @for ($i = 0; $i < 6; $i++)
-                            <div class="shimmer-container col mb-3">
+                            <div class="mb-3 shimmer-container col">
                                 @include('components.card_shimer_genres')
                             </div>
                         @endfor
@@ -215,9 +229,9 @@
             @if(isenablemodule('video') == 1)
                 <div id="video-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -231,9 +245,9 @@
 
                 <div id="base-on-last-watch-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -244,9 +258,9 @@
 
                 <div id="most-like-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -256,9 +270,9 @@
 
                 <div id="most-view-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -268,9 +282,9 @@
 
                 <div id="tranding-in-country-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider movie-shimmer">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 6; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_movieList')
                                 </div>
                             @endfor
@@ -284,9 +298,9 @@
 
                 <div id="favorite-genres-section" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider shimmer-container">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
                             @for ($i = 0; $i < 7; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimer_genres')
                                 </div>
                             @endfor
@@ -296,9 +310,9 @@
 
                 <div id="user-favorite-personality" class="section-wraper scroll-section section-hidden">
                     <div class="card-style-slider shimmer-container">
-                        <div class="row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7 mt-3">
+                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7">
                             @for ($i = 0; $i < 7; $i++)
-                                <div class="shimmer-container col mb-3">
+                                <div class="mb-3 shimmer-container col">
                                     @include('components.card_shimmer_crew')
                                 </div>
                             @endfor
@@ -407,6 +421,8 @@
                             fetchLanguages();
                         } else if (entry.target.id === 'popular-moive-section') {
                             fetchPopularMovies();
+                        } else if (entry.target.id === 'popular-moive-section-2') {
+                            fetchPopularMovies2();
                         } else if (entry.target.id === 'topchannel-section') {
                             fetchTopChannels();
                         } else if (entry.target.id === 'popular-tvshow-section') {
@@ -505,6 +521,17 @@
                     .then(response => response.json())
                     .then(data => {
                         document.getElementById('popular-moive-section').innerHTML = data.html;
+                        slickGeneral('slick-general-popular-movie', rtlMode);
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Popular Movies:', error);
+                    });
+            }
+            function fetchPopularMovies2() {
+                fetch(`${envURL}/api/popular-movie-2`)
+                    .then(response => response.json())
+                    .then(data => {
+                        document.getElementById('popular-moive-section-2').innerHTML = data.html;
                         slickGeneral('slick-general-popular-movie', rtlMode);
                     })
                     .catch(error => {
@@ -682,25 +709,25 @@
                             const ads = data.data.filter(item => item.placement === 'home_page');
                             if (ads.length > 0) {
                                 let adHtml = `
-                                                                <div class="custom-ad-box">
-                                                                    <div class="custom-ad-slider">
-                                                                        ${ads.map(ad => {
+                                                                                                    <div class="custom-ad-box">
+                                                                                                        <div class="custom-ad-slider">
+                                                                                                            ${ads.map(ad => {
                                     let content = '';
                                     if (ad.type === 'image') {
                                         let imgSrc = ad.url_type === 'local' ? `${ad.media}` : ad.media;
                                         content = `
-                                                                                    <div class="custom-ad-content">
-                                                                                        ${ad.redirect_url ? `
-                                                                                            <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
-                                                                                                <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                                                <div class="ad-overlay"></div>
-                                                                                            </a>
-                                                                                        ` : `
-                                                                                            <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                                            <div class="ad-overlay"></div>
-                                                                                        `}
-                                                                                    </div>
-                                                                                `;
+                                                                                                                        <div class="custom-ad-content">
+                                                                                                                            ${ad.redirect_url ? `
+                                                                                                                                <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
+                                                                                                                                    <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                                                                    <div class="ad-overlay"></div>
+                                                                                                                                </a>
+                                                                                                                            ` : `
+                                                                                                                                <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                                                                <div class="ad-overlay"></div>
+                                                                                                                            `}
+                                                                                                                        </div>
+                                                                                                                    `;
                                     } else if (ad.type === 'video') {
                                         // Check if it's a YouTube URL
                                         let isYouTube = ad.media.includes('youtube.com') || ad.media.includes('youtu.be');
@@ -714,51 +741,51 @@
                                                 videoId = url.searchParams.get('v');
                                             }
                                             content = `
-                                                                                        <div class="custom-ad-content video-content">
-                                                                                            <div class="video-container">
-                                                                                                <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
-                                                                                            </div>
-                                                                                            <div class="ad-overlay"></div>
-                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                        </div>
-                                                                                    `;
+                                                                                                                            <div class="custom-ad-content video-content">
+                                                                                                                                <div class="video-container">
+                                                                                                                                    <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
+                                                                                                                                </div>
+                                                                                                                                <div class="ad-overlay"></div>
+                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                            </div>
+                                                                                                                        `;
                                         } else if (ad.url_type == "url") {
                                             // Regular video file
                                             content = `
-                                                                                        <div class="custom-ad-content video-content">
-                                                                                            <div class="video-container">
-                                                                                                <video class="ad-video" autoplay muted loop playsinline>
-                                                                                                    <source src="${ad.media}" type="video/mp4">
-                                                                                                    Your browser does not support the video tag.
-                                                                                                </video>
-                                                                                            </div>
-                                                                                            <div class="ad-overlay"></div>
-                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                        </div>
-                                                                                    `;
+                                                                                                                            <div class="custom-ad-content video-content">
+                                                                                                                                <div class="video-container">
+                                                                                                                                    <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                                                        <source src="${ad.media}" type="video/mp4">
+                                                                                                                                        Your browser does not support the video tag.
+                                                                                                                                    </video>
+                                                                                                                                </div>
+                                                                                                                                <div class="ad-overlay"></div>
+                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                            </div>
+                                                                                                                        `;
                                         }
                                         else {
 
                                             // Regular video file
                                             content = `
-                                                                                        <div class="custom-ad-content video-content">
-                                                                                            <div class="video-container">
-                                                                                                <video class="ad-video" autoplay muted loop playsinline>
-                                                                                                    <source src="${baseUrl}${ad.media}" type="video/mp4">
-                                                                                                    Your browser does not support the video tag.
-                                                                                                </video>
-                                                                                            </div>
-                                                                                            <div class="ad-overlay"></div>
-                                                                                            ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                        </div>
-                                                                                    `;
+                                                                                                                            <div class="custom-ad-content video-content">
+                                                                                                                                <div class="video-container">
+                                                                                                                                    <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                                                        <source src="${baseUrl}${ad.media}" type="video/mp4">
+                                                                                                                                        Your browser does not support the video tag.
+                                                                                                                                    </video>
+                                                                                                                                </div>
+                                                                                                                                <div class="ad-overlay"></div>
+                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                            </div>
+                                                                                                                        `;
                                         }
                                     }
                                     return `<div class="custom-ad-wrapper">${content}</div>`;
                                 }).join('')}
-                                                                    </div>
-                                                                </div>
-                                                            `;
+                                                                                                        </div>
+                                                                                                    </div>
+                                                                                                `;
                                 const adSection = document.getElementById('custom-homepage-ad-section');
                                 if (adSection) {
                                     adSection.innerHTML = adHtml;
@@ -862,7 +889,63 @@
         });
 
     </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            // Target element jahan popular movies load hoti hain
+            var targetSection = document.getElementById('popular-moive-section-2');
 
+            // Observer create kar rahe hain jo changes watch karega
+            var observer = new MutationObserver(function (mutations) {
+                // Check karte hain ki kya slider content aa gaya hai?
+                var $mainSlider = jQuery(targetSection).find('.hero-sync-main');
+                var $thumbSlider = jQuery(targetSection).find('.hero-sync-thumbs');
+
+                // Agar slider HTML aa gaya hai aur abhi tak initialize nahi hua hai
+                if ($mainSlider.length > 0 && !$mainSlider.hasClass('slick-initialized')) {
+                    console.log('Hero Sync Slider Detected - Initializing...');
+
+                    // 1. Initialize Background Slider
+                    $mainSlider.slick({
+                        slidesToShow: 1,
+                        slidesToScroll: 1,
+                        arrows: false,
+                        fade: true,
+                        asNavFor: $thumbSlider,
+                        draggable: false
+                    });
+
+                    // 2. Initialize Thumbs Slider
+                    $thumbSlider.slick({
+                        slidesToShow: 3,
+                        slidesToScroll: 1,
+                        asNavFor: $mainSlider,
+                        dots: false,
+                        centerMode: true,
+                        focusOnSelect: true,
+                        vertical: true,
+                        verticalSwiping: true,
+                        arrows: false
+                    });
+
+                    // 3. Bind Custom Arrows
+                    jQuery(targetSection).find('.sync-up-btn').click(function () {
+                        $thumbSlider.slick('slickPrev');
+                    });
+                    jQuery(targetSection).find('.sync-down-btn').click(function () {
+                        $thumbSlider.slick('slickNext');
+                    });
+
+                    // Ek baar init ho gaya, ab disconnect kar sakte hain ya rehne de sakte hain
+                    // observer.disconnect();
+                }
+            });
+
+            // Observer start karte hain
+            if (targetSection) {
+                observer.observe(targetSection, { childList: true, subtree: true });
+            }
+        });
+    </script>
 @endpush
 @push('after-styles')
     <style>

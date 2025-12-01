@@ -21,11 +21,11 @@
                                     <div class="col-lg-7 col-md-12">
                                         <div class="hero-movie-info" style="padding-top: 100px;">
                                             <!-- Movie Title - Large Display -->
-                                            <h1 class="hero-movie-title-large mb-3">{{ $slideData['name'] }}</h1>
+                                            <h1 class="mb-3 hero-movie-title-large">{{ $slideData['name'] }}</h1>
 
                                             <!-- Rating and Meta Info -->
-                                            <div class="hero-movie-meta-info mb-3">
-                                                <ul class="list-inline m-0 p-0 d-flex align-items-center flex-wrap gap-3">
+                                            <div class="mb-3 hero-movie-meta-info">
+                                                <ul class="flex-wrap gap-3 p-0 m-0 list-inline d-flex align-items-center">
                                                     @if (!empty($slideData['rating']))
                                                         <li>
                                                             <span class="hero-movie-rating">
@@ -36,7 +36,7 @@
                                                     @endif
                                                     @if (!empty($slideData['imdb_rating']))
                                                         <li>
-                                                            <span class="d-flex align-items-center gap-2">
+                                                            <span class="gap-2 d-flex align-items-center">
                                                                 <i class="ph-fill ph-star text-warning"></i>
                                                                 <i class="ph-fill ph-star text-warning"></i>
                                                                 <i class="ph-fill ph-star text-warning"></i>
@@ -52,7 +52,7 @@
                                                     </li>
                                                     @if (!empty($slideData['duration']))
                                                         <li>
-                                                            <span class="d-flex align-items-center gap-1">
+                                                            <span class="gap-1 d-flex align-items-center">
                                                                 <i class="ph ph-clock"></i>
                                                                 <span>{{ str_replace(':', 'hr : ', $slideData['duration']) . 'min' }}</span>
                                                             </span>
@@ -62,14 +62,14 @@
                                             </div>
 
                                             <!-- Description -->
-                                            <p class="hero-movie-description mb-4 hero-line-count-4">
+                                            <p class="mb-4 hero-movie-description hero-line-count-4">
                                                 {!! $slideData['description'] ?? '' !!}
                                             </p>
 
                                             <!-- Tags/Genres -->
                                             @if (!empty($slideData['genres']))
-                                                <div class="hero-movie-tags mb-3">
-                                                    <span class="text-muted me-2">Tags:</span>
+                                                <div class="mb-3 hero-movie-tags">
+                                                    <span class="text-danger me-2">Tags:</span>
                                                     @foreach ($slideData['genres'] as $genre)
                                                         <span
                                                             class="badge bg-dark me-2">{{ is_array($genre) ? $genre['name'] ?? '' : $genre->name ?? '' }}</span>
@@ -79,8 +79,8 @@
 
                                             <!-- Additional Info -->
                                             @if (!empty($slideData['genres']))
-                                                <div class="hero-movie-additional-info mb-3">
-                                                    <span class="text-muted me-2">Genres:</span>
+                                                <div class="mb-3 hero-movie-additional-info">
+                                                    <span class="text-danger me-2">Genres:</span>
                                                     @php
                                                         $genresList = [];
                                                         foreach ($slideData['genres'] as $genre) {
@@ -95,8 +95,8 @@
                                             @endif
 
                                             @if (isset($slideData['cast']) && !empty($slideData['cast']))
-                                                <div class="hero-movie-additional-info mb-4">
-                                                    <span class="text-muted me-2">Starting:</span>
+                                                <div class="mb-4 hero-movie-additional-info">
+                                                    <span class="text-danger me-2">Starting:</span>
                                                     @php
                                                         $castList = [];
                                                         $count = 0;
@@ -118,7 +118,7 @@
                                             <!-- Play Button -->
                                             <div class="mt-4">
                                                 <a href="{{ $slider['type'] == 'livetv' ? route('livetv-details', ['id' => $slideData['id']]) : ($slider['type'] == 'video' ? route('video-details', ['id' => $slideData['id']]) : ($slideData['type'] == 'tvshow' ? route('tvshow-details', ['id' => $slideData['id']]) : route('movie-details', ['id' => $slideData['id']]))) }}"
-                                                    class="btn btn-danger btn-lg px-5 hero-play-btn">
+                                                    class="px-5 btn btn-lg hero-play-btn">
                                                     <i class="ph-fill ph-play me-2"></i> Play Now
                                                 </a>
                                             </div>
@@ -149,11 +149,11 @@
                         @if (isenablemodule($slider['type']) == 1)
                             <div class="hero-side-thumbnail-item" data-slide-index="{{ $index }}">
                                 <div class="hero-side-movie-card position-relative">
-                                    <img src="{{ setBaseUrlWithFileName($slider['file_url']) }}" class="img-fluid rounded"
+                                    <img src="{{ setBaseUrlWithFileName($slider['file_url']) }}" class="rounded img-fluid"
                                         alt="{{ $thumbnailData['name'] ?? 'Movie' }}">
                                     <div class="hero-side-movie-overlay">
-                                        <h6 class="text-white mb-1">{{ $thumbnailData['name'] ?? 'Featured' }}</h6>
-                                        <p class="text-white-50 small mb-0">
+                                        <h6 class="mb-1 text-white">{{ $thumbnailData['name'] ?? 'Featured' }}</h6>
+                                        <p class="mb-0 text-white-50 small">
                                             <i class="ph ph-clock"></i>
                                             @if (!empty($thumbnailData['duration']))
                                                 {{ str_replace(':', 'hr : ', $thumbnailData['duration']) . 'min' }}
@@ -258,6 +258,8 @@
     .hero-play-btn {
         box-shadow: 0 4px 15px rgba(220, 53, 69, 0.4);
         transition: all 0.3s ease;
+        background: #e50914;
+        color: #fff;
     }
 
     .hero-play-btn:hover {

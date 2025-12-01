@@ -23,6 +23,7 @@ Route::get('top-10-movie', [DashboardController::class, 'Top10Movies']);
 Route::get('latest-movie', [DashboardController::class, 'LatestMovies']);
 Route::get('fetch-languages', [DashboardController::class, 'FetchLanguages']);
 Route::get('popular-movie', [DashboardController::class, 'PopularMovies']);
+Route::get('popular-movie-2', [DashboardController::class, 'PopularMovies2']);
 Route::get('top-channels', [DashboardController::class, 'TopChannels']);
 Route::get('popular-tvshows', [DashboardController::class, 'PopularTVshows']);
 Route::get('favorite-personality', [DashboardController::class, 'favoritePersonality']);
@@ -58,9 +59,3 @@ Route::get('/transaction-history', [TransactionController::class, 'transactionHi
 
 Route::get('/check-episode-purchase', [TvShowController::class, 'checkEpisodePurchase'])->name('check.episode.purchase');
 Route::get('/check-movie-purchase', [TvShowController::class, 'checkMoviePurchase'])->name('check.movie.purchase');
-
-
-
-
-
-
