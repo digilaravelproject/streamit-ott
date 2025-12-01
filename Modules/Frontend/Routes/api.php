@@ -24,6 +24,7 @@ Route::get('latest-movie', [DashboardController::class, 'LatestMovies']);
 Route::get('fetch-languages', [DashboardController::class, 'FetchLanguages']);
 Route::get('popular-movie', [DashboardController::class, 'PopularMovies']);
 Route::get('popular-movie-2', [DashboardController::class, 'PopularMovies2']);
+Route::get('popular-series-home', [DashboardController::class, 'PopularSeriesHome']);
 Route::get('top-channels', [DashboardController::class, 'TopChannels']);
 Route::get('popular-tvshows', [DashboardController::class, 'PopularTVshows']);
 Route::get('favorite-personality', [DashboardController::class, 'favoritePersonality']);

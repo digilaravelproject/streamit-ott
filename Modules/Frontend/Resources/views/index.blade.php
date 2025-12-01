@@ -19,7 +19,7 @@
 
 
 
-    <div class="container-fluid padding-right-1" style="padding-right: 0.7rem;">
+    <div class="container-fluid padding-right-1" style="padding-right: 0.7rem;padding: 0 1.25em !important;">
         <div class="overflow-hidden">
 
             @php
@@ -174,20 +174,138 @@
                     </div>
                 </div>
             @endif
-            @if(isenablemodule('movie') == 1)
 
-                <div id="popular-moive-section-2" class="section-wraper scroll-section section-hidden">
-                    <div class="card-style-slider movie-shimmer">
-                        <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-4 row-cols-xl-6">
-                            @for ($i = 0; $i < 6; $i++)
-                                <div class="mb-3 shimmer-container col">
-                                    @include('components.card_shimmer_movieList')
+       @if(isenablemodule('movie') == 1)
+    <div id="popular-moive-section-2" class="section-wraper scroll-section section-hidden">
+        {{-- Custom Skeleton for Hero Sync Layout --}}
+        <div class="mb-4 hero-sync-shimmer placeholder-glow">
+            <div class="overflow-hidden hero-wrapper-box position-relative rounded-3 w-100" style="height: 550px; background-color: #000;">
+
+                {{-- 1. Left Side Vertical Thumbnails Skeleton (Hidden on Mobile) --}}
+                <div class="gap-3 d-none d-lg-flex flex-column align-items-center position-absolute"
+                     style="left: 30px; top: 50%; transform: translateY(-50%); width: 200px; z-index: 20;">
+
+                    <span class="placeholder rounded-circle bg-secondary" style="width: 32px; height: 32px;"></span>
+
+                    <span class="placeholder bg-secondary rounded-2 w-100" style="height: 110px; opacity: 0.3;"></span>
+                    <span class="border border-white placeholder bg-secondary rounded-2 w-100" style="height: 110px; opacity: 0.8;"></span> {{-- Middle one highlighted --}}
+                    <span class="placeholder bg-secondary rounded-2 w-100" style="height: 110px; opacity: 0.3;"></span>
+
+                    <span class="placeholder rounded-circle bg-secondary" style="width: 32px; height: 32px;"></span>
+                </div>
+
+                {{-- 2. Main Content Skeleton --}}
+                <div class="p-4 d-flex flex-column justify-content-center position-absolute content-skeleton-area"
+                     style="z-index: 10; height: 100%;">
+
+                    <span class="mb-3 rounded placeholder bg-secondary" style="width: 400px; height: 60px;"></span>
+
+                    <div class="gap-3 mb-4 d-flex">
+                        <span class="px-2 rounded placeholder bg-light" style="width: 40px; height: 20px;"></span>
+                        <span class="rounded placeholder bg-secondary" style="width: 80px; height: 20px;"></span>
+                        <span class="rounded placeholder bg-secondary" style="width: 60px; height: 20px;"></span>
+                    </div>
+
+                    <span class="mb-2 rounded placeholder bg-secondary col-12 d-none d-md-block" style="height: 14px; opacity: 0.6;"></span>
+                    <span class="mb-2 rounded placeholder bg-secondary col-10 d-none d-md-block" style="height: 14px; opacity: 0.6;"></span>
+                    <span class="mb-4 rounded placeholder bg-secondary col-8 d-none d-md-block" style="height: 14px; opacity: 0.6;"></span>
+
+                    <span class="rounded placeholder bg-danger" style="width: 150px; height: 45px;"></span>
+                </div>
+
+            </div>
+        </div>
+    </div>
+
+    {{-- Inline CSS to handle responsive positioning for Skeleton --}}
+    <style>
+        .content-skeleton-area {
+            left: 260px;
+            width: 500px;
+        }
+        @media(max-width: 991px) {
+            .hero-wrapper-box {
+                height: 300px !important; /* Mobile height match */
+            }
+            .content-skeleton-area {
+                left: 0 !important;
+                width: 100% !important;
+                background: #111;
+            }
+        }
+    </style>
+@endif
+
+            @if(isenablemodule('tvshow') == 1)
+                <div id="popular-series-section" class="section-wraper scroll-section section-hidden">
+                    {{-- Custom Skeleton for Popular Series (Matches Exact UI Layout) --}}
+                    <div class="popular-series-shimmer placeholder-glow">
+                        <div class="overflow-hidden series-card-wrapper position-relative rounded-3 w-100"
+                            style="height: 600px; background-color: #000;">
+
+                            <div class="row h-100 g-0">
+                                <div class="p-5 col-lg-8 col-md-7 d-flex flex-column justify-content-center ps-lg-5">
+
+                                    <div class="gap-3 mb-4 d-flex align-items-center">
+                                        <span class="rounded placeholder bg-secondary col-2" style="height: 25px;"></span>
+                                        <span class="rounded placeholder bg-secondary col-3" style="height: 20px;"></span>
+                                    </div>
+
+                                    <span class="mb-4 rounded placeholder bg-secondary col-7" style="height: 60px;"></span>
+
+                                    <span class="mb-2 placeholder bg-secondary col-9"></span>
+                                    <span class="mb-2 placeholder bg-secondary col-8"></span>
+                                    <span class="mb-4 placeholder bg-secondary col-6"></span>
+
+                                    <div class="gap-3 mb-5 d-flex">
+                                        <span class="placeholder bg-secondary col-1"></span>
+                                        <span class="placeholder bg-secondary col-2"></span>
+                                    </div>
+
+                                    <div class="gap-4 d-flex flex-column">
+                                        <span class="rounded placeholder bg-secondary"
+                                            style="width: 180px; height: 50px;"></span>
+
+                                        <div class="gap-3 d-flex">
+                                            <span class="placeholder rounded-circle bg-secondary"
+                                                style="width: 40px; height: 40px;"></span>
+                                            <span class="placeholder rounded-circle bg-secondary"
+                                                style="width: 40px; height: 40px;"></span>
+                                        </div>
+                                    </div>
                                 </div>
-                            @endfor
+
+                                <div class="col-lg-4 col-md-5 d-none d-md-block h-100"
+                                    style="background: rgba(255,255,255,0.05); border-left: 1px solid rgba(255,255,255,0.1);">
+                                    <div class="p-4 pt-5 h-100 d-flex flex-column">
+                                        <span class="mb-4 placeholder bg-secondary col-4" style="height: 20px;"></span>
+
+                                        <div class="gap-4 mb-4 d-flex">
+                                            <span class="placeholder bg-secondary col-3" style="height: 10px;"></span>
+                                            <span class="placeholder bg-secondary col-3" style="height: 10px;"></span>
+                                        </div>
+
+                                        <div class="gap-3 d-flex flex-column">
+                                            @for($i = 0; $i < 4; $i++)
+                                                <div class="gap-3 d-flex align-items-center">
+                                                    <span class="rounded placeholder bg-secondary"
+                                                        style="width: 130px; height: 74px; flex-shrink: 0;"></span>
+                                                    <div class="gap-2 w-100 d-flex flex-column">
+                                                        <span class="placeholder bg-secondary col-10" style="height: 14px;"></span>
+                                                        <span class="placeholder bg-secondary col-4" style="height: 12px;"></span>
+                                                    </div>
+                                                </div>
+                                            @endfor
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
             @endif
+
+
             <div id="favorite-personality" class="section-wraper scroll-section section-hidden">
                 <div class="card-style-slider shimmer-container">
                     <div class="mt-3 row gy-4 row-cols-2 row-cols-sm-2 row-cols-md-3 row-cols-lg-5 row-cols-xl-7">
@@ -423,7 +541,10 @@
                             fetchPopularMovies();
                         } else if (entry.target.id === 'popular-moive-section-2') {
                             fetchPopularMovies2();
-                        } else if (entry.target.id === 'topchannel-section') {
+                        } else if (entry.target.id === 'popular-series-section') {
+                            fetchPopularSeriesHome();
+                        }
+                        else if (entry.target.id === 'topchannel-section') {
                             fetchTopChannels();
                         } else if (entry.target.id === 'popular-tvshow-section') {
                             fetchPopularTvshows();
@@ -539,7 +660,30 @@
                     });
             }
 
+            function fetchPopularSeriesHome() {
+                console.log("Fetching Popular Series Data..."); // Debug Log
+                fetch(`${envURL}/api/popular-series-home`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log("Data Received:", data); // Debug Log
+                        const section = document.getElementById('popular-series-section');
+                        if (data.html) {
+                            section.innerHTML = data.html;
+                            section.classList.remove('section-hidden');
+                            section.classList.add('section-visible');
 
+                            // Slick Slider Init
+                            setTimeout(() => {
+                                slickGeneral('slick-general-popular-series', rtlMode);
+                            }, 500);
+                        } else {
+                            console.warn("HTML is empty");
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error fetching Popular Series:', error);
+                    });
+            }
             function fetchTopChannels() {
                 fetch(`${envURL}/api/top-channels`)
                     .then(response => response.json())
@@ -709,25 +853,25 @@
                             const ads = data.data.filter(item => item.placement === 'home_page');
                             if (ads.length > 0) {
                                 let adHtml = `
-                                                                                                    <div class="custom-ad-box">
-                                                                                                        <div class="custom-ad-slider">
-                                                                                                            ${ads.map(ad => {
+                                                                                                                        <div class="custom-ad-box">
+                                                                                                                            <div class="custom-ad-slider">
+                                                                                                                                ${ads.map(ad => {
                                     let content = '';
                                     if (ad.type === 'image') {
                                         let imgSrc = ad.url_type === 'local' ? `${ad.media}` : ad.media;
                                         content = `
-                                                                                                                        <div class="custom-ad-content">
-                                                                                                                            ${ad.redirect_url ? `
-                                                                                                                                <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
-                                                                                                                                    <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                                                                                    <div class="ad-overlay"></div>
-                                                                                                                                </a>
-                                                                                                                            ` : `
-                                                                                                                                <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
-                                                                                                                                <div class="ad-overlay"></div>
-                                                                                                                            `}
-                                                                                                                        </div>
-                                                                                                                    `;
+                                                                                                                                            <div class="custom-ad-content">
+                                                                                                                                                ${ad.redirect_url ? `
+                                                                                                                                                    <a href="${ad.redirect_url}" class="ad-link" target="_blank" rel="noopener noreferrer">
+                                                                                                                                                        <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                                                                                        <div class="ad-overlay"></div>
+                                                                                                                                                    </a>
+                                                                                                                                                ` : `
+                                                                                                                                                    <img src="${imgSrc}" alt="${ad.name}" class="ad-image">
+                                                                                                                                                    <div class="ad-overlay"></div>
+                                                                                                                                                `}
+                                                                                                                                            </div>
+                                                                                                                                        `;
                                     } else if (ad.type === 'video') {
                                         // Check if it's a YouTube URL
                                         let isYouTube = ad.media.includes('youtube.com') || ad.media.includes('youtu.be');
@@ -741,51 +885,51 @@
                                                 videoId = url.searchParams.get('v');
                                             }
                                             content = `
-                                                                                                                            <div class="custom-ad-content video-content">
-                                                                                                                                <div class="video-container">
-                                                                                                                                    <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
-                                                                                                                                </div>
-                                                                                                                                <div class="ad-overlay"></div>
-                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                                                            </div>
-                                                                                                                        `;
+                                                                                                                                                <div class="custom-ad-content video-content">
+                                                                                                                                                    <div class="video-container">
+                                                                                                                                                        <iframe class="ad-video" src="https://www.youtube.com/embed/${videoId}?rel=0&autoplay=1&mute=1&controls=0&showinfo=0&modestbranding=1&loop=1&playlist=${videoId}" frameborder="0"></iframe>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="ad-overlay"></div>
+                                                                                                                                                    ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                                                </div>
+                                                                                                                                            `;
                                         } else if (ad.url_type == "url") {
                                             // Regular video file
                                             content = `
-                                                                                                                            <div class="custom-ad-content video-content">
-                                                                                                                                <div class="video-container">
-                                                                                                                                    <video class="ad-video" autoplay muted loop playsinline>
-                                                                                                                                        <source src="${ad.media}" type="video/mp4">
-                                                                                                                                        Your browser does not support the video tag.
-                                                                                                                                    </video>
-                                                                                                                                </div>
-                                                                                                                                <div class="ad-overlay"></div>
-                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                                                            </div>
-                                                                                                                        `;
+                                                                                                                                                <div class="custom-ad-content video-content">
+                                                                                                                                                    <div class="video-container">
+                                                                                                                                                        <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                                                                            <source src="${ad.media}" type="video/mp4">
+                                                                                                                                                            Your browser does not support the video tag.
+                                                                                                                                                        </video>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="ad-overlay"></div>
+                                                                                                                                                    ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                                                </div>
+                                                                                                                                            `;
                                         }
                                         else {
 
                                             // Regular video file
                                             content = `
-                                                                                                                            <div class="custom-ad-content video-content">
-                                                                                                                                <div class="video-container">
-                                                                                                                                    <video class="ad-video" autoplay muted loop playsinline>
-                                                                                                                                        <source src="${baseUrl}${ad.media}" type="video/mp4">
-                                                                                                                                        Your browser does not support the video tag.
-                                                                                                                                    </video>
-                                                                                                                                </div>
-                                                                                                                                <div class="ad-overlay"></div>
-                                                                                                                                ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
-                                                                                                                            </div>
-                                                                                                                        `;
+                                                                                                                                                <div class="custom-ad-content video-content">
+                                                                                                                                                    <div class="video-container">
+                                                                                                                                                        <video class="ad-video" autoplay muted loop playsinline>
+                                                                                                                                                            <source src="${baseUrl}${ad.media}" type="video/mp4">
+                                                                                                                                                            Your browser does not support the video tag.
+                                                                                                                                                        </video>
+                                                                                                                                                    </div>
+                                                                                                                                                    <div class="ad-overlay"></div>
+                                                                                                                                                    ${ad.redirect_url ? `<div class="ad-video-overlay" onclick="window.open('${ad.redirect_url}', '_blank')"></div>` : ''}
+                                                                                                                                                </div>
+                                                                                                                                            `;
                                         }
                                     }
                                     return `<div class="custom-ad-wrapper">${content}</div>`;
                                 }).join('')}
-                                                                                                        </div>
-                                                                                                    </div>
-                                                                                                `;
+                                                                                                                            </div>
+                                                                                                                        </div>
+                                                                                                                    `;
                                 const adSection = document.getElementById('custom-homepage-ad-section');
                                 if (adSection) {
                                     adSection.innerHTML = adHtml;

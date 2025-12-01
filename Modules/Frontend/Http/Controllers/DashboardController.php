@@ -203,8 +203,83 @@ class DashboardController extends Controller
 
         return response()->json(['html' => $html]);
     }
+    public function PopularSeriesHome(Request $request)
+    {
+        try {
+            // 1. Fetch Latest 5 TV Shows
+            $shows = Entertainment::where('type', 'tvshow')
+                ->where('status', 1)
+                ->orderBy('created_at', 'desc')
+                ->take(5)
+                ->get();
 
+            if ($shows->isEmpty()) {
+                return response()->json(['html' => '']);
+            }
 
+            // 2. Map Data (Mimicking TvshowDetailResource Logic)
+            $popular_series = $shows->map(function ($show) {
+
+                // --- FETCH SEASONS (Manual Query) ---
+                $seasons = Season::where('entertainment_id', $show->id)
+                    ->where('status', 1)
+                    ->orderBy('id', 'asc') // Changed from season_no to id based on previous error
+                    ->get();
+
+                $seasonsData = $seasons->map(function ($season) {
+
+                    // --- FETCH EPISODES (Manual Query) ---
+                    $episodes = Episode::where('season_id', $season->id)
+                        ->where('status', 1)
+                        ->orderBy('id', 'asc') // Changed from episode_no to id
+                        ->get();
+
+                    return [
+                        'id' => $season->id,
+                        'name' => $season->name,
+                        'episodes' => $episodes->map(function ($episode) {
+                            // Logic from EpisodeResource.php
+                            // Using poster_url if available, otherwise poster_image
+                            $epImg = $episode->poster_url ?? $episode->poster_image;
+
+                            return [
+                                'id' => $episode->id,
+                                'name' => $episode->name,
+                                'duration' => $episode->duration,
+                                // Strict usage of your system helper
+                                'poster_image' => setBaseUrlWithFileName($epImg)
+                            ];
+                        })
+                    ];
+                });
+
+                // Logic from TvshowResource.php
+                // Using poster_url if available, otherwise poster_image
+                $bannerImg = $show->poster_url ?? $show->poster_image;
+
+                return [
+                    'id' => $show->id,
+                    'name' => $show->name,
+                    'description' => strip_tags($show->description), // Using strip_tags like your resource
+                    'banner_image' => setBaseUrlWithFileName($bannerImg), // Strict usage of your system helper
+                    'rating' => $show->IMDb_rating ?? $show->imdb_rating ?? '0',
+                    'year' => $show->release_date ?? '',
+                    'seasons' => $seasonsData
+                ];
+            });
+
+            // 3. Render View
+            $html = view('frontend::components.section.popular_series', [
+                'data' => $popular_series,
+                // 'title' => __('frontend.popular_series')
+            ])->render();
+
+            return response()->json(['html' => $html]);
+        } catch (\Exception $e) {
+            \Log::error("PopularSeriesHome Error: " . $e->getMessage());
+            return response()->json(['html' => '']);
+        }
+    }
     public function TopChannels()
     {
         $cacheKey = 'top_channel';
