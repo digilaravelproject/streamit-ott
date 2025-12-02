@@ -19,7 +19,7 @@
                             : ($type == 'pay-per-view'
                                 ? route('pay-per-view')
                                 : route('movies'))
-                                                                                }}"
+                                                                                                                    }}"
                         class="flex-none view-all-button text-decoration-none">
                         <span>{{ __('frontend.view_all') }}</span>
                         <i class="ph ph-caret-right"></i>
@@ -75,8 +75,8 @@
                         @include('frontend::components.card.card_video', ['data' => $value])
                     @elseif(isset($value['type']) && $value['type'] === 'episode')
                         @include('frontend::components.card.card_pay_per_view', ['data' => $value])
-                    @elseif(isset($slug) && $slug === 'per_pay_view')
-                        @include('frontend::components.card.card_entertainment_verti', ['data' => $value])
+                        {{-- @elseif(isset($slug) && $slug === 'per_pay_view')
+                        @include('frontend::components.card.card_entertainment_verti', ['data' => $value]) --}}
 
                     @else
                         @include('frontend::components.card.card_entertainment', ['value' => $value])
