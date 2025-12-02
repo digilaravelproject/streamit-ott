@@ -46,23 +46,23 @@ class PaymentController extends Controller
         $planId = $request->input('plan_id');
         $promotionId = $request->input('promotionId');
         $planName = $request->input('plan_name');
-        $plan= Plan::where('status',1)->get();
+        $plan = Plan::where('status', 1)->get();
 
         $plans = PlanResource::collection($plan);
 
-        $activeSubscriptions = Subscription::where('user_id', auth()->id())->where('status', 'active')->where('end_date', '>', now())->orderBy('id','desc')->first();
+        $activeSubscriptions = Subscription::where('user_id', auth()->id())->where('status', 'active')->where('end_date', '>', now())->orderBy('id', 'desc')->first();
         $currentPlanId = $activeSubscriptions ? $activeSubscriptions->plan_id : null;
 
 
         $planId = $planId ?? $currentPlanId ?? Plan::first()->id ?? null;
 
         $promotions = Coupon::where('status', 1)
-        ->where('start_date', '<=', now())
-        ->where('expire_date', '>=', now())
-        // ->whereHas('subscriptionPlans', function ($query) use ($planId) {
-        //     $query->where('subscription_plan_id', $planId);
-        // })
-        ->get();
+            ->where('start_date', '<=', now())
+            ->where('expire_date', '>=', now())
+            // ->whereHas('subscriptionPlans', function ($query) use ($planId) {
+            //     $query->where('subscription_plan_id', $planId);
+            // })
+            ->get();
 
         $clientKey = GetpaymentMethod('midtrans_client_id');
         $view = view('frontend::subscriptionPayment', compact('plans', 'planId', 'currentPlanId', 'promotions', 'clientKey'))->render();
@@ -147,7 +147,6 @@ class PaymentController extends Controller
             ]);
 
             return response()->json(['redirect' => $checkout_session->url]);
-
         } catch (\Stripe\Exception\InvalidRequestException $e) {
 
             $errorMessage = $e->getMessage();
@@ -155,7 +154,6 @@ class PaymentController extends Controller
                 $errorMessage = "The amount entered is too low to process a payment. Please increase the amount and try again.";
             }
             return response()->json(['error' => $errorMessage], 400);
-
         } catch (\Exception $e) {
 
             return response()->json(['error' => 'Something went wrong. Please try again later.'], 500);
@@ -170,7 +168,7 @@ class PaymentController extends Controller
         $plan_id = $request->input('plan_id');
         $promotion_id = $request->input('promotion_id');
         $priceInPaise = $price * 100;
-        $currency=GetcurrentCurrency();
+        $currency = GetcurrentCurrency();
         $formattedCurrency = strtoupper(strtolower($currency));
 
         try {
@@ -193,10 +191,9 @@ class PaymentController extends Controller
                     'contact' => auth()->user()->phone ?? ''
                 ]
             ]);
-
         } catch (\Exception $e) {
             return response()->json(['error' => $e->getMessage()], 400);
-          }
+        }
     }
 
 
@@ -210,7 +207,7 @@ class PaymentController extends Controller
         $plan_id = $request->input('plan_id');
         $priceInKobo = $price * 100; // Paystack uses kobo
 
-        $currency=GetcurrentCurrency();
+        $currency = GetcurrentCurrency();
         $formattedCurrency = strtoupper(strtolower($currency));
 
 
@@ -238,7 +235,7 @@ class PaymentController extends Controller
 
             $message = isset($responseBody['message']) ? $responseBody['message'] : 'Something went wrong, choose a different method';
 
-            return response()->json(['error' =>$message], 400);
+            return response()->json(['error' => $message], 400);
         }
     }
     /**
@@ -318,7 +315,7 @@ class PaymentController extends Controller
             $currency = GetcurrentCurrency();
             $formattedCurrency = strtoupper(strtolower($currency));
 
-             $logo=GetSettingValue('mini_logo') ??  asset(setting('mini_logo'));
+            $logo = GetSettingValue('mini_logo') ??  asset(setting('mini_logo'));
 
             // Generate unique transaction reference
             $tx_ref = 'FLW-' . uniqid() . '-' . time();
@@ -348,7 +345,6 @@ class PaymentController extends Controller
                     'redirect_url' => $baseURL . '/payment/success?gateway=flutterwave'
                 ]
             ]);
-
         } catch (\Exception $e) {
             Log::error('Flutterwave Payment Error:', [
                 'error' => $e->getMessage(),
@@ -495,7 +491,7 @@ class PaymentController extends Controller
     private function getAccessToken()
     {
         $clientId =  GetpaymentMethod('paypal_clientid');
-        $clientSecret =GetpaymentMethod('paypal_secretkey');
+        $clientSecret = GetpaymentMethod('paypal_secretkey');
 
         $client = new Client();
         $response = $client->post('https://api.sandbox.paypal.com/v1/oauth2/token', [
@@ -586,10 +582,10 @@ class PaymentController extends Controller
     {
         $user = Auth::user();
 
-    // Deactivate existing active subscriptions
+        // Deactivate existing active subscriptions
         Subscription::where('user_id', $user->id)
-        ->where('status', 'active')
-        ->update(['status' => 'inactive']);
+            ->where('status', 'active')
+            ->update(['status' => 'inactive']);
 
         $plan = Plan::findOrFail($plan_id);
         $limitation_data = PlanlimitationMappingResource::collection($plan->planLimitation);
@@ -661,8 +657,8 @@ class PaymentController extends Controller
         ]);
 
         Subscription::where('user_id', auth()->id())
-    ->where('id', '!=', $subscription->id)
-    ->update(['status' => 'inactive']);
+            ->where('id', '!=', $subscription->id)
+            ->update(['status' => 'inactive']);
 
 
         // Create a subscription transaction
@@ -677,23 +673,22 @@ class PaymentController extends Controller
         ]);
 
 
-       $response = new SubscriptionResource($subscription);
+        $response = new SubscriptionResource($subscription);
 
-       $this->sendNotificationOnsubscription('new_subscription', $response);
-       if (isSmtpConfigured()) {
-           if ($user) {
-               try {
-                   Mail::to($user->email)->send(new SubscriptionDetail($response));
-
-               } catch (\Exception $e) {
-                   Log::error('Failed to send email to ' . $user->email . ': ' . $e->getMessage());
-               }
-           } else {
-               Log::info('User object is not set. Email not sent.');
-           }
-       } else {
-           Log::error('SMTP configuration is not set correctly. Email not sent.');
-       }
+        $this->sendNotificationOnsubscription('new_subscription', $response);
+        if (isSmtpConfigured()) {
+            if ($user) {
+                try {
+                    Mail::to($user->email)->send(new SubscriptionDetail($response));
+                } catch (\Exception $e) {
+                    Log::error('Failed to send email to ' . $user->email . ': ' . $e->getMessage());
+                }
+            } else {
+                Log::info('User object is not set. Email not sent.');
+            }
+        } else {
+            Log::error('SMTP configuration is not set correctly. Email not sent.');
+        }
 
 
 
@@ -718,37 +713,58 @@ class PaymentController extends Controller
     protected function handleStripeSuccess(Request $request)
     {
         $sessionId = $request->input('session_id');
-        $stripe_secret_key=GetpaymentMethod('stripe_secretkey');
+        $stripe_secret_key = GetpaymentMethod('stripe_secretkey');
         $stripe = new StripeClient($stripe_secret_key);
 
         try {
             $session = $stripe->checkout->sessions->retrieve($sessionId);
-            return $this->handlePaymentSuccess($session->metadata->plan_id, $session->amount_total / 100, 'stripe', $session->payment_intent  ,$session->metadata->promotion_id );
+            return $this->handlePaymentSuccess($session->metadata->plan_id, $session->amount_total / 100, 'stripe', $session->payment_intent, $session->metadata->promotion_id);
         } catch (\Exception $e) {
             return redirect('/')->with('error', 'Payment failed: ' . $e->getMessage());
         }
     }
 
     protected function handleRazorpaySuccess(Request $request)
-{
-    $paymentId = $request->input('razorpay_payment_id');
-    $razorpayOrderId = session('razorpay_order_id');
-    $plan_id = $request->input('plan_id');
+    {
+        $paymentId = $request->input('razorpay_payment_id');
+        $plan_id = $request->input('plan_id');
 
-    $razorpayKey = GetpaymentMethod('razorpay_publickey');
-    $razorpaySecret = GetpaymentMethod('razorpay_secretkey');
+        // Debugging ke liye Log add karein
+        \Log::info('Razorpay Success Handler Started', [
+            'payment_id' => $paymentId,
+            'plan_id' => $plan_id
+        ]);
 
-    $api = new \Razorpay\Api\Api($razorpayKey, $razorpaySecret);
-    $payment = $api->payment->fetch($paymentId);
+        $razorpayKey = GetpaymentMethod('razorpay_publickey');
+        $razorpaySecret = GetpaymentMethod('razorpay_secretkey');
 
-    if ($payment['status'] == 'captured') {
-        return $this->handlePaymentSuccess($plan_id, $payment['amount'] / 100, 'razorpay', $paymentId);
-    } else {
-        return redirect('/')->with('error', 'Payment failed: ' . $payment['error_description']);
+        try {
+            $api = new \Razorpay\Api\Api($razorpayKey, $razorpaySecret);
+            $payment = $api->payment->fetch($paymentId);
+
+            \Log::info('Razorpay Payment Status Fetched', ['status' => $payment['status']]);
+
+            // AGAR STATUS AUTHORIZED HAI TO USKO CAPTURE KAREIN
+            if ($payment['status'] == 'authorized') {
+                $payment->capture(array('amount' => $payment['amount']));
+                $payment = $api->payment->fetch($paymentId); // Status update hone ke baad wapas fetch karein
+                \Log::info('Razorpay Payment Captured Successfully');
+            }
+
+            // Ab check karein ki captured hai ya nahi
+            if ($payment['status'] == 'captured') {
+                return $this->handlePaymentSuccess($plan_id, $payment['amount'] / 100, 'razorpay', $paymentId);
+            } else {
+                \Log::error('Razorpay Payment Not Captured', ['status' => $payment['status']]);
+                return redirect('/')->with('error', 'Payment failed: Status is ' . $payment['status']);
+            }
+        } catch (\Exception $e) {
+            \Log::error('Razorpay Exception: ' . $e->getMessage());
+            return redirect('/')->with('error', 'Payment failed: ' . $e->getMessage());
+        }
     }
-}
 
-   protected function handlePaystackSuccess(Request $request)
+    protected function handlePaystackSuccess(Request $request)
     {
         $reference = $request->input('reference');
 
@@ -767,7 +783,7 @@ class PaymentController extends Controller
         }
     }
 
-   protected function handlePayPalSuccess(Request $request)
+    protected function handlePayPalSuccess(Request $request)
     {
         $paymentId = $request->input('paymentId');
         $payerId = $request->input('PayerID');
@@ -816,10 +832,12 @@ class PaymentController extends Controller
 
             $responseData = $response->json();
 
-            if ($response->successful() &&
+            if (
+                $response->successful() &&
                 isset($responseData['status']) &&
                 $responseData['status'] === 'success' &&
-                $responseData['data']['tx_ref'] === $tx_ref) {
+                $responseData['data']['tx_ref'] === $tx_ref
+            ) {
 
                 return $this->handlePaymentSuccess(
                     $plan_id,
@@ -830,7 +848,6 @@ class PaymentController extends Controller
             }
 
             throw new \Exception('Payment verification failed');
-
         } catch (\Exception $e) {
             Log::error('Flutterwave Payment Error', [
                 'error' => $e->getMessage(),
@@ -867,7 +884,7 @@ class PaymentController extends Controller
         return $this->handlePaymentSuccess($plan_id, $request->input('amount'), 'sadad', $transactionId);
     }
 
-   public function midtransNotification(Request $request)
+    public function midtransNotification(Request $request)
     {
         $payload = json_decode($request->getContent(), true);
 
@@ -884,7 +901,7 @@ class PaymentController extends Controller
 
     protected function makeSadadPaymentRequest($price, $plan_id)
     {
-        $sadad_Sadadkey=GetpaymentMethod('sadad_Sadadkey');
+        $sadad_Sadadkey = GetpaymentMethod('sadad_Sadadkey');
 
         $url = 'https://api.sadad.com/payment';
         $data = [
@@ -917,7 +934,7 @@ class PaymentController extends Controller
         return $this->handlePaymentSuccess($planId, $request->input('amount'), 'airtel', $transactionId);
     }
 
-     protected function handlePhonePeSuccess(Request $request)
+    protected function handlePhonePeSuccess(Request $request)
     {
         $transactionId = $request->input('transaction_id');
         $paymentStatus = $request->input('status');
@@ -932,7 +949,7 @@ class PaymentController extends Controller
 
     protected function makePhonePePaymentRequest($price, $plan_id)
     {
-        $currency=GetcurrentCurrency();
+        $currency = GetcurrentCurrency();
 
         $formattedCurrency = strtoupper(strtolower($currency));
 
@@ -958,7 +975,7 @@ class PaymentController extends Controller
     protected function makeAirtelPaymentRequest($price, $plan_id)
     {
 
-        $airtel_money_secretkey=GetpaymentMethod('airtel_money_secretkey');
+        $airtel_money_secretkey = GetpaymentMethod('airtel_money_secretkey');
 
 
         $url = 'https://api.airtel.com/payment';
@@ -985,13 +1002,13 @@ class PaymentController extends Controller
         $today = now()->toDateString();
 
         $promotions = Coupon::where('status', 1)
-        ->whereDate('start_date', '<=', $today)
-        ->whereDate('expire_date', '>=', $today)
-            ->where(function($query) use ($planId) {
+            ->whereDate('start_date', '<=', $today)
+            ->whereDate('expire_date', '>=', $today)
+            ->where(function ($query) use ($planId) {
                 $query->whereDoesntHave('subscriptionPlans')
-                      ->orWhereHas('subscriptionPlans', function($q) use ($planId) {
-                          $q->where('subscription_plan_id', $planId);
-                      });
+                    ->orWhereHas('subscriptionPlans', function ($q) use ($planId) {
+                        $q->where('subscription_plan_id', $planId);
+                    });
             })
             ->get();
         return response()->json([

@@ -19,7 +19,7 @@
                             : ($type == 'pay-per-view'
                                 ? route('pay-per-view')
                                 : route('movies'))
-                                                                                                                    }}"
+                                                                                                                                }}"
                         class="flex-none view-all-button text-decoration-none">
                         <span>{{ __('frontend.view_all') }}</span>
                         <i class="ph ph-caret-right"></i>
